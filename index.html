@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipo Dev | Desarrollo Web y Apps de Élite</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00f7ff;
+      --primary-dark: #00c6fe;
+      --secondary: #ff2d75;
+      --accent: #7b2dff;
+      --dark: #0a0a0a;
+      --dark-light: #111111;
+      --light: #ffffff;
+      --gray: #a0a0a0;
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --card-shadow: 0 15px 30px rgba(0, 242, 254, 0.2);
+      --neon-glow: 0 0 10px rgba(0, 247, 255, 0.7), 0 0 20px rgba(0, 247, 255, 0.5), 0 0 30px rgba(0, 247, 255, 0.3);
+      --text-glow: 0 0 5px rgba(0, 247, 255, 0.8);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(123, 45, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.05) 0%, transparent 20%);
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    
+    /* Header Futurista */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      z-index: 1000;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+      transition: var(--transition);
+    }
+    
+    header.scrolled {
+      padding: 10px 0;
+      box-shadow: var(--shadow);
+      background: rgba(10, 10, 10, 0.95);
+      border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+    }
+    
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+    }
+    
+    .logo img {
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      transition: var(--transition);
+      box-shadow: var(--text-glow);
+      background-color: white;
+    }
+    
+    .logo:hover img {
+      transform: rotate(15deg) scale(1.1);
+      box-shadow: 0 0 15px rgba(0, 247, 255, 0.8);
+    }
+    
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      text-shadow: var(--text-glow);
+      position: relative;
+    }
+    
+    .logo h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+    }
+    
+    .logo:hover h1::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 35px;
+    }
+    
+    nav a {
+      font-weight: 600;
+      font-size: 1.05rem;
+      position: relative;
+      padding: 8px 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transition: var(--transition);
+      border-radius: 3px;
+    }
+    
+    nav a:hover::before,
+    nav a.active::before {
+      width: 100%;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+      text-shadow: var(--text-glow);
+    }
+    
+    nav a.active {
+      color: var(--primary);
+    }
+    
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      font-size: 1.8rem;
+      color: var(--primary);
+      transition: var(--transition);
+      z-index: 1001;
+    }
+    
+    .menu-toggle:hover {
+      transform: rotate(90deg);
+      text-shadow: var(--text-glow);
+    }
+    
+    /* Hero Section Futurista */
+    .inicio {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .inicio::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop') center/cover no-repeat;
+      opacity: 0.08;
+      z-index: -1;
+    }
+    
+    .inicio .container {
+      text-align: center;
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .inicio h2 {
+      font-size: 4.5rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      line-height: 1.1;
+      background: linear-gradient(to right, var(--primary), var(--light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease;
+      letter-spacing: -1px;
+      text-shadow: 0 5px 25px rgba(0, 247, 255, 0.4);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .inicio h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 3px;
+      box-shadow: var(--text-glow);
+    }
+    
+    .inicio p {
+      font-size: 1.5rem;
+      margin-bottom: 50px;
+      color: rgba(255, 255, 255, 0.9);
+      animation: fadeInUp 1s ease 0.2s forwards;
+      opacity: 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 20px 50px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: var(--dark);
+      border-radius: 50px;
+      font-weight: 700;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 247, 255, 0.5);
+      font-size: 1.2rem;
+      animation: fadeInUp 1s ease 0.4s forwards;
+      opacity: 0;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+      z-index: 1;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      border: 2px solid transparent;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 247, 255, 0.6), var(--neon-glow);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--accent), var(--primary));
+      opacity: 0;
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      opacity: 1;
+    }
+    
+    .btn span {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Efecto de partículas */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(0, 247, 255, 0.6);
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: float 15s infinite linear;
+      opacity: 0;
+    }
+    
+    /* Sections Premium */
+    section {
+      padding: 160px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    section h2 {
+      font-size: 3.5rem;
+      margin-bottom: 100px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(to right, var(--primary), var(--light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 5px 25px rgba(0, 247, 255, 0.4);
+    }
+    
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 5px;
+      box-shadow: var(--text-glow);
+    }
+    
+    /* Sobre mí Futurista */
+    .sobremi {
+      background-color: var(--dark-light);
+      position: relative;
+    }
+    
+    .sobremi::before {
+      content: '';
+      position: absolute;
+      top: -300px;
+      left: -300px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255, 45, 117, 0.1) 0%, rgba(255, 45, 117, 0) 70%);
+      z-index: 0;
+      animation: pulse 15s infinite alternate;
+    }
+    
+    .sobremi::after {
+      content: '';
+      position: absolute;
+      bottom: -300px;
+      right: -300px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(123, 45, 255, 0.1) 0%, rgba(123, 45, 255, 0) 70%);
+      z-index: 0;
+      animation: pulse 18s infinite alternate-reverse;
+    }
+    
+    .sobremi .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .sobremi p {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 2;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+    }
+    
+    .sobremi p strong {
+      color: var(--primary);
+      font-weight: 600;
+      position: relative;
+      text-shadow: var(--text-glow);
+    }
+    
+    .sobremi p strong::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), transparent);
+      box-shadow: var(--text-glow);
+    }
+    
+    .sobremi p em {
+      display: block;
+      margin-top: 50px;
+      font-style: normal;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.6rem;
+      position: relative;
+      display: inline-block;
+      text-shadow: var(--text-glow);
+    }
+    
+    .sobremi p em::before {
+      content: '“';
+      position: absolute;
+      left: -40px;
+      top: -15px;
+      font-size: 4rem;
+      color: var(--primary);
+      opacity: 0.5;
+      text-shadow: var(--text-glow);
+    }
+    
+    .sobremi p em::after {
+      content: '”';
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      font-size: 4rem;
+      color: var(--primary);
+      opacity: 0.5;
+      text-shadow: var(--text-glow);
+    }
+    
+    /* Servicios Futuristas */
+    .servicios {
+      position: relative;
+    }
+    
+    .servicios::before {
+      content: '';
+      position: absolute;
+      top: -300px;
+      left: -300px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 247, 255, 0.1) 0%, rgba(0, 247, 255, 0) 70%);
+      z-index: 0;
+      animation: pulse 20s infinite alternate;
+    }
+    
+    .servicios .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .servicios .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 60px;
+    }
+    
+    .card {
+      background: linear-gradient(to bottom, rgba(30, 30, 30, 0.8), rgba(20, 20, 20, 0.6));
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 60px 40px;
+      border-radius: 25px;
+      transition: var(--transition);
+      text-align: center;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      box-shadow: var(--text-glow);
+    }
+    
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 247, 255, 0.03) 0%, rgba(123, 45, 255, 0.03) 100%);
+      z-index: -1;
+    }
+    
+    .card:hover {
+      transform: translateY(-20px) scale(1.03);
+      box-shadow: 0 25px 60px rgba(0, 247, 255, 0.3), var(--neon-glow);
+      border-color: var(--primary);
+    }
+    
+    .card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: var(--text-glow);
+    }
+    
+    .card p {
+      color: var(--gray);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    
+    .card i {
+      font-size: 4rem;
+      margin-bottom: 35px;
+      color: var(--primary);
+      transition: var(--transition);
+      display: inline-block;
+      text-shadow: var(--text-glow);
+    }
+    
+    .card:hover i {
+      transform: scale(1.2) rotate(10deg);
+      text-shadow: 0 0 25px rgba(0, 247, 255, 0.8);
+    }
+    
+    .portfolio-tech {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    
+    .tech-tag {
+      padding: 8px 20px;
+      background-color: rgba(0, 247, 255, 0.1);
+      border-radius: 25px;
+      font-size: 0.9rem;
+      color: var(--primary);
+      border: 1px solid rgba(0, 247, 255, 0.3);
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .card:hover .tech-tag {
+      background-color: rgba(0, 247, 255, 0.2);
+      border-color: var(--primary);
+      box-shadow: var(--text-glow);
+      transform: translateY(-3px);
+    }
+    
+    /* Portafolio Futurista */
+    .portafolio {
+      background-color: var(--dark-light);
+      position: relative;
+    }
+    
+    .portafolio::before {
+      content: '';
+      position: absolute;
+      top: -300px;
+      left: -300px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255, 45, 117, 0.1) 0%, rgba(255, 45, 117, 0) 70%);
+      z-index: 0;
+      animation: pulse 16s infinite alternate;
+    }
+    
+    .portfolio-container {
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .portfolio-section {
+      margin-bottom: 80px;
+    }
+    
+    .portfolio-section h3 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: var(--primary);
+      position: relative;
+      padding-left: 30px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-shadow: var(--text-glow);
+    }
+    
+    .portfolio-section h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 80%;
+      width: 8px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 8px;
+      box-shadow: var(--text-glow);
+    }
+    
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 50px;
+    }
+    
+    .portfolio-item {
+      background: linear-gradient(to bottom, rgba(21, 21, 21, 0.9), rgba(10, 10, 10, 0.9));
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      position: relative;
+    }
+    
+    .portfolio-item:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), var(--neon-glow);
+      border-color: var(--primary);
+    }
+    
+    .portfolio-img {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .portfolio-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 247, 255, 0.1), rgba(0, 10, 15, 0.8));
+      z-index: 1;
+    }
+    
+    .portfolio-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .portfolio-item:hover .portfolio-img img {
+      transform: scale(1.1);
+    }
+    
+    .portfolio-info {
+      padding: 40px;
+    }
+    
+    .portfolio-info h4 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--light);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .portfolio-info p {
+      color: var(--gray);
+      margin-bottom: 25px;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+    
+    .portfolio-info .status {
+      display: inline-block;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+    
+    .status.completed {
+      background-color: rgba(0, 255, 100, 0.1);
+      color: #00ff64;
+      border: 1px solid rgba(0, 255, 100, 0.3);
+      text-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
+    }
+    
+    .status.in-progress {
+      background-color: rgba(255, 200, 0, 0.1);
+      color: #ffc800;
+      border: 1px solid rgba(255, 200, 0, 0.3);
+      text-shadow: 0 0 10px rgba(255, 200, 0, 0.5);
+    }
+    
+    .portfolio-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    
+    .tech-tag {
+      padding: 8px 20px;
+      background-color: rgba(0, 247, 255, 0.1);
+      border-radius: 25px;
+      font-size: 0.9rem;
+      color: var(--primary);
+      border: 1px solid rgba(0, 247, 255, 0.3);
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .portfolio-item:hover .tech-tag {
+      background-color: rgba(0, 247, 255, 0.2);
+      border-color: var(--primary);
+      box-shadow: var(--text-glow);
+      transform: translateY(-3px);
+    }
+    
+    .portfolio-prices {
+      margin-top: 100px;
+      background: linear-gradient(to bottom, rgba(21, 21, 21, 0.95), rgba(10, 10, 10, 0.95));
+      padding: 60px;
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .portfolio-prices::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(45deg, transparent 65%, rgba(0, 247, 255, 0.03) 100%),
+        linear-gradient(-45deg, transparent 65%, rgba(123, 45, 255, 0.03) 100%);
+      z-index: -1;
+    }
+    
+    .portfolio-prices h3 {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 2.5rem;
+      color: var(--light);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-shadow: var(--text-glow);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      background-color: var(--dark);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    
+    table::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 65%, rgba(0, 247, 255, 0.03) 100%);
+      z-index: -1;
+    }
+    
+    th, td {
+      padding: 25px 30px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    th {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    
+    tr:hover {
+      background-color: rgba(0, 247, 255, 0.03);
+    }
+    
+    td {
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+    
+    td:last-child {
+      font-weight: 600;
+      color: var(--primary);
+      text-shadow: var(--text-glow);
+    }
+    
+    /* Contacto Futurista */
+    .contacto {
+      position: relative;
+    }
+    
+    .contacto::before {
+      content: '';
+      position: absolute;
+      top: -300px;
+      left: -300px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 247, 255, 0.1) 0%, rgba(0, 247, 255, 0) 70%);
+      z-index: 0;
+      animation: pulse 18s infinite alternate;
+    }
+    
+    .contacto .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .contacto ul {
+      list-style: none;
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(to bottom, rgba(21, 21, 21, 0.95), rgba(10, 10, 10, 0.95));
+      padding: 60px;
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contacto ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(45deg, transparent 65%, rgba(0, 247, 255, 0.03) 100%),
+        linear-gradient(-45deg, transparent 65%, rgba(123, 45, 255, 0.03) 100%);
+      z-index: -1;
+    }
+    
+    .contacto li {
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 1.3rem;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .contacto li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: var(--text-glow);
+    }
+    
+    .contacto strong {
+      min-width: 160px;
+      color: var(--primary);
+      font-weight: 600;
+      text-shadow: var(--text-glow);
+    }
+    
+    .contacto a {
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-weight: 300;
+    }
+    
+    .contacto a:hover {
+      color: var(--primary);
+      transform: translateX(10px);
+      text-shadow: var(--text-glow);
+    }
+    
+    .contacto i {
+      font-size: 1.6rem;
+      width: 40px;
+      color: var(--primary);
+      text-shadow: var(--text-glow);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 80px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, rgba(21, 21, 21, 0.9), rgba(10, 10, 10, 0.9));
+      color: var(--light);
+      font-size: 2rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .social-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: var(--transition);
+      z-index: -1;
+    }
+    
+    .social-links a:hover {
+      color: var(--dark);
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 0 15px 50px rgba(0, 247, 255, 0.4), var(--neon-glow);
+    }
+    
+    .social-links a:hover::before {
+      opacity: 1;
+    }
+    
+    /* Footer Futurista */
+    footer {
+      background: linear-gradient(to bottom, var(--dark-light), var(--dark));
+      padding: 60px 0 40px;
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--gray);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--primary), transparent);
+      box-shadow: var(--text-glow);
+    }
+    
+    footer p {
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Team Section */
+    .team {
+      position: relative;
+      background-color: var(--dark);
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+      margin-top: 80px;
+    }
+    
+    .team-member {
+      background: linear-gradient(to bottom, rgba(30, 30, 30, 0.8), rgba(20, 20, 20, 0.6));
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 25px;
+      transition: var(--transition);
+      text-align: center;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .team-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      box-shadow: var(--text-glow);
+    }
+    
+    .team-member-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      overflow: hidden;
+      border: 3px solid var(--primary);
+      box-shadow: var(--text-glow);
+      transition: var(--transition);
+    }
+    
+    .team-member:hover .team-member-img {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(0, 247, 255, 0.8);
+    }
+    
+    .team-member-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .team-member h4 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+      font-weight: 700;
+      text-shadow: var(--text-glow);
+    }
+    
+    .team-member p.role {
+      color: var(--gray);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    
+    .team-member p.bio {
+      color: var(--gray);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+    
+    .team-member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 247, 255, 0.3), var(--neon-glow);
+      border-color: var(--primary);
+    }
+    
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+    }
+    
+    /* Efectos de aparición */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: var(--transition);
+    }
+    
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Efecto de cursor personalizado */
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(0, 247, 255, 0.7);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+      display: none;
+    }
+    
+    .cursor.active {
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 247, 255, 0.3);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1400px) {
+      .inicio h2 {
+        font-size: 4rem;
+      }
+      
+      section h2 {
+        font-size: 3.2rem;
+      }
+    }
+    
+    @media (max-width: 1200px) {
+      .inicio h2 {
+        font-size: 3.5rem;
+      }
+      
+      section {
+        padding: 140px 0;
+      }
+      
+      section h2 {
+        font-size: 2.8rem;
+        margin-bottom: 80px;
+      }
+      
+      .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .inicio h2 {
+        font-size: 3rem;
+      }
+      
+      section {
+        padding: 120px 0;
+      }
+      
+      section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 70px;
+      }
+      
+      .servicios .grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+      
+      .card {
+        padding: 50px 30px;
+      }
+      
+      .portfolio-info {
+        padding: 30px;
+      }
+      
+      .portfolio-prices {
+        padding: 50px 40px;
+      }
+      
+      .contacto ul {
+        padding: 50px 40px;
+      }
+      
+      .team-member {
+        padding: 30px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header .container {
+        padding: 0 25px;
+      }
+      
+      .logo h1 {
+        font-size: 1.5rem;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(10, 10, 10, 0.98), rgba(10, 10, 10, 0.97));
+        padding: 50px 25px;
+        clip-path: circle(0% at 100% 0);
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 999;
+      }
+      
+      nav.active {
+        clip-path: circle(150% at 100% 0);
+      }
+      
+      nav ul {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      nav a {
+        font-size: 1.2rem;
+      }
+      
+      .inicio h2 {
+        font-size: 2.5rem;
+      }
+      
+      .inicio p {
+        font-size: 1.3rem;
+      }
+      
+      section {
+        padding: 100px 0;
+      }
+      
+      section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 60px;
+      }
+      
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .portfolio-section h3 {
+        font-size: 2rem;
+      }
+      
+      .portfolio-prices {
+        margin-top: 80px;
+        padding: 40px 30px;
+      }
+      
+      table {
+        font-size: 0.95rem;
+      }
+      
+      th, td {
+        padding: 20px 15px;
+      }
+      
+      .contacto li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding-left: 30px;
+      }
+      
+      .contacto strong {
+        min-width: auto;
+      }
+      
+      .social-links {
+        gap: 30px;
+      }
+      
+      .social-links a {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .inicio h2 {
+        font-size: 2.2rem;
+      }
+      
+      .inicio p {
+        font-size: 1.1rem;
+      }
+      
+      .btn {
+        padding: 18px 40px;
+        font-size: 1.1rem;
+      }
+      
+      section h2 {
+        font-size: 2rem;
+      }
+      
+      .sobremi p {
+        font-size: 1.2rem;
+      }
+      
+      .sobremi p em {
+        font-size: 1.3rem;
+      }
+      
+      .servicios .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card {
+        padding: 40px 25px;
+      }
+      
+      .card h3 {
+        font-size: 1.6rem;
+      }
+      
+      .portfolio-img {
+        height: 250px;
+      }
+      
+      .portfolio-info h4 {
+        font-size: 1.6rem;
+      }
+      
+      .portfolio-info p {
+        font-size: 1rem;
+      }
+      
+      .contacto li {
+        font-size: 1.1rem;
+      }
+      
+      .contacto i {
+        font-size: 1.4rem;
+      }
+      
+      .social-links {
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      
+      .social-links a {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+      }
+      
+      .team-member {
+        padding: 25px;
+      }
+      
+      .team-member-img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cursor personalizado -->
+  <div class="cursor"></div>
+  
+  <!-- Navegación Futurista -->
+  <header id="header">
+    <div class="container">
+      <div class="logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTAiLz48L3N2Zz4=" alt="Logo Equipo Dev">
+        <h1>Equipo Dev</h1>
+      </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#inicio" class="active">Inicio</a></li>
+          <li><a href="#sobremi">Sobre Nosotros</a></li>
+          <li><a href="#equipo">Nuestro Equipo</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#portafolio">Portafolio</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Inicio Futurista -->
+  <section id="inicio" class="inicio">
+    <div class="particles" id="particles"></div>
+    <div class="container">
+      <h2>Transformando Ideas en <span class="typed-text"></span><span class="cursor">&nbsp;</span></h2>
+      <p>Somos un equipo de desarrollo especializado en crear aplicaciones móviles de élite, experiencias web inmersivas y soluciones digitales a medida con tecnología de vanguardia</p>
+      <a href="#contacto" class="btn"><span>Iniciar Proyecto</span></a>
+    </div>
+  </section>
+
+  <!-- Sobre nosotros Futurista -->
+  <section id="sobremi" class="sobremi">
+    <div class="container">
+      <h2>Sobre Nosotros</h2>
+      <p>Somos <strong>Equipo Dev</strong>, un colectivo de profesionales apasionados por la tecnología y la innovación. Con más de [X] años combinados de experiencia en desarrollo de software, hemos perfeccionado el arte de convertir conceptos en experiencias digitales excepcionales que no solo cumplen, sino que superan expectativas.<br><br>
+      Nuestro enfoque combina <strong>diseño meticuloso</strong>, <strong>código optimizado</strong> y <strong>tecnología de punta</strong> para crear aplicaciones móviles fluidas, plataformas web de alto rendimiento y soluciones personalizadas que dejan huella. Cada proyecto es una oportunidad para innovar, asegurando resultados que destacan en el competitivo mundo digital.<br><br>
+      <em>No desarrollamos productos, creamos experiencias digitales memorables.</em></p>
+    </div>
+  </section>
+
+  <!-- Nuestro Equipo -->
+  <section id="equipo" class="team">
+    <div class="container">
+      <h2>Nuestro Equipo</h2>
+      <div class="team-grid">
+        <div class="team-member fade-in">
+          <div class="team-member-img">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Desarrollador Frontend">
+          </div>
+          <h4>Alex Rodríguez</h4>
+          <p class="role">Desarrollador Frontend</p>
+          <p class="bio">Especialista en React y Vue.js con pasión por crear interfaces de usuario fluidas y accesibles.</p>
+          <div class="team-member-skills">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">CSS3</span>
+          </div>
+        </div>
+        
+        <div class="team-member fade-in">
+          <div class="team-member-img">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Desarrolladora Backend">
+          </div>
+          <h4>María Sánchez</h4>
+          <p class="role">Desarrolladora Backend</p>
+          <p class="bio">Experta en arquitectura de servidores y bases de datos, enfocada en seguridad y escalabilidad.</p>
+          <div class="team-member-skills">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">SQL</span>
+          </div>
+        </div>
+        
+        <div class="team-member fade-in">
+          <div class="team-member-img">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Diseñador UI/UX">
+          </div>
+          <h4>Carlos Méndez</h4>
+          <p class="role">Diseñador UI/UX</p>
+          <p class="bio">Creador de experiencias de usuario intuitivas y visualmente impactantes que cautivan a los usuarios.</p>
+          <div class="team-member-skills">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Adobe XD</span>
+            <span class="tech-tag">Prototipado</span>
+          </div>
+        </div>
+        
+        <div class="team-member fade-in">
+          <div class="team-member-img">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Desarrolladora Móvil">
+          </div>
+          <h4>Laura Gómez</h4>
+          <p class="role">Desarrolladora Móvil</p>
+          <p class="bio">Especialista en aplicaciones nativas para Android e iOS, con énfasis en performance y usabilidad.</p>
+          <div class="team-member-skills">
+            <span class="tech-tag">Kotlin</span>
+            <span class="tech-tag">Swift</span>
+            <span class="tech-tag">Flutter</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios Futuristas -->
+  <section id="servicios" class="servicios">
+    <div class="container">
+      <h2>Servicios de Élite</h2>
+      <div class="grid">
+        <div class="card fade-in">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Apps Móviles Avanzadas</h3>
+          <p>Aplicaciones nativas para Android e iOS con arquitectura limpia, integraciones API, bases de datos locales y diseño UI/UX premium. Desde apps empresariales hasta marketplaces complejos.</p>
+          <div class="portfolio-tech">
+            <span class="tech-tag">Kotlin</span>
+            <span class="tech-tag">Swift</span>
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Firebase</span>
+          </div>
+        </div>
+        <div class="card fade-in">
+          <i class="fas fa-globe"></i>
+          <h3>Webs de Alto Impacto</h3>
+          <p>Sitios web performantes con diseño responsive, animaciones fluidas, SEO integrado y CMS personalizado. Desde landing pages hasta plataformas web complejas con backend robusto.</p>
+          <div class="portfolio-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Laravel</span>
+          </div>
+        </div>
+        <div class="card fade-in">
+          <i class="fas fa-laptop-code"></i>
+          <h3>Software Empresarial</h3>
+          <p>Soluciones desktop personalizadas para automatización de procesos, gestión de inventarios, sistemas de punto de venta y más, con bases de datos robustas y reportes avanzados.</p>
+          <div class="portfolio-tech">
+            <span class="tech-tag">.NET</span>
+            <span class="tech-tag">Java</span>
+            <span class="tech-tag">SQL Server</span>
+            <span class="tech-tag">Electron</span>
+          </div>
+        </div>
+        <div class="card fade-in">
+          <i class="fas fa-envelope-open-text"></i>
+          <h3>Invitaciones Élite</h3>
+          <p>Invitaciones digitales interactivas con diseño exclusivo, animaciones personalizadas, RSVP integrado, galerías multimedia y estadísticas de asistencia en tiempo real.</p>
+          <div class="portfolio-tech">
+            <span class="tech-tag">GSAP</span>
+            <span class="tech-tag">Three.js</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">WebGL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portafolio Futurista -->
+  <section id="portafolio" class="portafolio">
+    <div class="container">
+      <h2>Portafolio de Éxitos</h2>
+      
+      <div class="portfolio-container">
+        <div class="portfolio-section">
+          <h3>Proyectos Destacados</h3>
+          <div class="portfolio-grid">
+            <!-- Página Web Premium -->
+            <div class="portfolio-item fade-in">
+              <div class="portfolio-img">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Página Web Premium">
+              </div>
+              <div class="portfolio-info">
+                <h4>Web Corporativa "LujoStyle"</h4>
+                <span class="status completed">Entregado</span>
+                <p>Sitio web premium para marca de moda con catálogo interactivo, carrito de compras, integración con redes sociales y panel de administración personalizado.</p>
+                <div class="portfolio-tech">
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">MongoDB</span>
+                  <span class="tech-tag">Redux</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- App Móvil Premium -->
+            <div class="portfolio-item fade-in">
+              <div class="portfolio-img">
+                <img src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="App Móvil Premium">
+              </div>
+              <div class="portfolio-info">
+                <h4>App "TaskMaster Pro"</h4>
+                <span class="status in-progress">En Desarrollo</span>
+                <p>Aplicación de productividad con sincronización en tiempo real, reconocimiento de voz, IA para priorización de tareas y análisis de productividad.</p>
+                <div class="portfolio-tech">
+                  <span class="tech-tag">Kotlin</span>
+                  <span class="tech-tag">Firebase</span>
+                  <span class="tech-tag">ML Kit</span>
+                  <span class="tech-tag">Coroutines</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Invitación Digital Premium -->
+            <div class="portfolio-item fade-in">
+              <div class="portfolio-img">
+                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Invitación Digital Premium">
+              </div>
+              <div class="portfolio-info">
+                <h4>Invitación "Boda Diamante"</h4>
+                <span class="status completed">Entregado</span>
+                <p>Invitación de lujo con diseño 3D interactivo, video de la pareja, mapa animado, confirmación de asistencia y galería fotográfica con efectos parallax.</p>
+                <div class="portfolio-tech">
+                  <span class="tech-tag">Three.js</span>
+                  <span class="tech-tag">GSAP</span>
+                  <span class="tech-tag">PHP</span>
+                  <span class="tech-tag">WebGL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-prices">
+          <h3>Inversión en Excelencia</h3>
+          <table>
+            <tr>
+              <th>Servicio</th>
+              <th>Alcance</th>
+              <th>Inversión</th>
+            </tr>
+            <tr>
+              <td>Invitación Digital Premium</td>
+              <td>Diseño exclusivo, animaciones 3D, RSVP con estadísticas</td>
+              <td>Desde $1,800 MXN</td>
+            </tr>
+            <tr>
+              <td>Web Corporativa</td>
+              <td>5-7 secciones, diseño responsive, CMS básico</td>
+              <td>Desde $4,200 MXN</td>
+            </tr>
+            <tr>
+              <td>App Móvil Personalizada</td>
+              <td>Hasta 10 pantallas, base de datos local, UI personalizada</td>
+              <td>Desde $7,500 MXN</td>
+            </tr>
+            <tr>
+              <td>Sistema de Gestión</td>
+              <td>Backend con panel de administración y reportes</td>
+              <td>Desde $9,800 MXN</td>
+            </tr>
+            <tr>
+              <td>Soluciones Enterprise</td>
+              <td>Desarrollos complejos con múltiples módulos</td>
+              <td>Cotización personalizada</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto Futurista -->
+  <section id="contacto" class="contacto">
+    <div class="container">
+      <h2>Comencemos tu Proyecto</h2>
+      
+      <ul>
+        <p>Para consultas sobre proyectos o cotizaciones personalizadas:</p>
+        <li>
+          <strong>WhatsApp:</strong> 
+          <a href="https://wa.me/527861234567" target="_blank">
+            <i class="fab fa-whatsapp"></i> +52 7861234567
+          </a>
+        </li>
+        <li>
+          <strong>Email:</strong> 
+          <a href="mailto:contacto@equipodev.com">
+            <i class="fas fa-envelope"></i> contacto@equipodev.com
+          </a>
+        </li>
+        <li>
+          <strong>Facebook:</strong> 
+          <a href="https://www.facebook.com/equipodev" target="_blank">
+            <i class="fab fa-facebook-f"></i> /EquipoDev
+          </a>
+        </li>
+        <li>
+          <strong>Instagram:</strong> 
+          <a href="https://www.instagram.com/equipodev" target="_blank">
+            <i class="fab fa-instagram"></i> @EquipoDev
+          </a>
+        </li>
+      </ul>
+      
+      <div class="social-links">
+        <a href="https://wa.me/527861116178" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:contacto@equipodev.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.facebook.com/equipodev" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/equipodev" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Futurista -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Equipo Dev. Desarrollo de Software Premium. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Menú responsive futurista
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      menuToggle.innerHTML = nav.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+      menuToggle.style.transform = nav.classList.contains('active') ? 
+        'rotate(180deg)' : 'rotate(0)';
+    });
+    
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        menuToggle.style.transform = 'rotate(0)';
+      });
+    });
+    
+    // Cambiar clase activa al hacer scroll
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      const header = document.getElementById('header');
+      
+      // Efecto header al hacer scroll
+      if (scrollPosition > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      // Cambiar enlace activo
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+      
+      // Efecto de aparición mejorado
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 100) {
+          element.classList.add('show');
+        }
+      });
+    });
+    
+    // Forzar ejecución al cargar la página
+    window.dispatchEvent(new Event('scroll'));
+    
+    // Efecto de máquina de escribir para el título
+    const typedTextSpan = document.querySelector('.typed-text');
+    const cursorSpan = document.querySelector('.cursor');
+    
+    const textArray = ["Realidad Digital", "Experiencias", "Aplicaciones", "Sitios Web", "Soluciones"];
+    const typingDelay = 100;
+    const erasingDelay = 50;
+    const newTextDelay = 1500;
+    let textArrayIndex = 0;
+    let charIndex = 0;
+    
+    function type() {
+      if (charIndex < textArray[textArrayIndex].length) {
+        typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingDelay);
+      } else {
+        setTimeout(erase, newTextDelay);
+      }
+    }
+    
+    function erase() {
+      if (charIndex > 0) {
+        typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+        charIndex--;
+        setTimeout(erase, erasingDelay);
+      } else {
+        textArrayIndex++;
+        if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+        setTimeout(type, typingDelay + 500);
+      }
+    }
+    
+    // Iniciar el efecto después de 1 segundo
+    setTimeout(() => {
+      if (textArray.length) type();
+    }, 1000);
+    
+    // Cursor personalizado
+    const cursor = document.querySelector('.cursor');
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      cursor.style.display = 'block';
+      
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('active');
+        });
+      });
+    }
+    
+    // Efecto de partículas
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 30;
+    
+    if (particlesContainer) {
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Posición aleatoria
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        
+        // Tamaño aleatorio
+        const size = Math.random() * 5 + 1;
+        
+        // Duración de animación aleatoria
+        const duration = Math.random() * 20 + 10;
+        
+        // Retraso aleatorio
+        const delay = Math.random() * -20;
+        
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+  </script>
+</body>
+</html>
